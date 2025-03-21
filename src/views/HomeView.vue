@@ -23,24 +23,24 @@ onMounted(() => {
     <Suspense>
       <TheModel 
         :position="[-1, 0, -2]"
-        :scale="[.1, .1, .1,]"
-        :path="'cubito.glb'" />
+        :scale="[1,1,1]"
+        :path="'https://raw.githubusercontent.com/XnetLoL/test/main/breakdance.glb'"
+      />
     </Suspense>
     <Suspense>
-      <TheModel 
-      :position="[-1, 0, 0]"
-      :scale="[.1, .1, .1,]"
-      :path="'cubito.glb'" />
+      <TheModel :position="[-1, 0, 0]"
+      :scale="[1,1,1]"
+      :path="'SMPL_male_120_140_tx_embed.glb'" />
     </Suspense>
     <Suspense>
       <TheModel :position="[1, 0, 0]"
-      :scale="[.1, .1, .1,]"
-      :path="'cubito.glb'" />
+      :scale="[1,1,1]"
+      :path="'skel_male_120_140_tx_embed.glb'" />
     </Suspense>
     <Suspense>
       <TheModel :position="[2, 0, 0]"
-      :scale="[.1, .1, .1,]"
-      :path="'cubito.glb'" />
+      :scale="[1,1,1]"
+      :path="'myoMesh_male_120_140_tx_embed.glb'" />
     </Suspense>
     
     <TresGridHelper :args="[size, divisions]" />
