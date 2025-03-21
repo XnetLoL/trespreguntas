@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import { onUnmounted } from 'vue'
 import { dispose, useRenderLoop } from '@tresjs/core'
 import { useGLTF, GLTFModel, useAnimations } from '@tresjs/cientos'
@@ -28,8 +28,8 @@ if (path.includes("skel")){
 const { onLoop } = useRenderLoop()
 if (skelMat) {
   onLoop(({ delta, elapsed, clock }) => {
-      let t = elapsed * 10; // multiply it so it variates faster
-      let norm_sin = Math.sin(t) * 0.5 + 0.5;
+      const t = elapsed * 10; // multiply it so it variates faster
+      const norm_sin = Math.sin(t) * 0.5 + 0.5;
       skelMat.emissive.b = norm_sin;
     });
 }
