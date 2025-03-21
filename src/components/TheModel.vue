@@ -27,8 +27,17 @@ model.position.set(props.position[0], props.position[1], props.position[2]);
 onUnmounted(() => {
   dispose(model)
 })
+
+function printClickInfo(event){
+  if (event.intersections) {
+    event.intersections.forEach(intersection => {
+      console.log(`Click hit ${intersection.object.name} at`, intersection.point);
+    });
+  }
+}
 </script>
 
+
 <template>
-  <primitive :object="model" />
+  <primitive :object="model" @click="printClickInfo"/>
 </template>
