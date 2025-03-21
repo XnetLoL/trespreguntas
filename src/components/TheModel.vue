@@ -3,24 +3,26 @@ import { onUnmounted } from 'vue'
 import { dispose } from '@tresjs/core'
 import { useGLTF, useAnimations } from '@tresjs/cientos'
 
-const props = defineProps(['position'])
+const props = defineProps(['position', 'path'])
 
-console.log(props.position)
 
-const path = 'https://raw.githubusercontent.com/XnetLoL/test/main/breakdance.glb'
+const path = props.path;
 
 const { scene: model, animations } = await useGLTF(path)
 
 const { actions } = useAnimations(animations, model)
 
-// Note: mixer update is being called somewhere
+console.log("Loaded model", path);
 
-console.log('actions:', actions)
-const currentAction = actions['Armature|mixamo.com|Layer0']
-// .Myo_animation
-model.position.set(props.position[0], props.position[1], props.position[2])
+// Play the first animation found
+const actionKeys = Object.keys(actions);
+console.log("Found actions:", actionKeys);
+const firstActionKey = actionKeys.length > 0 ? actionKeys[0] : null;
+const currentAction = firstActionKey ? actions[firstActionKey] : null;
+if (currentAction) currentAction.play()
 
-currentAction.play()
+// Set position from component prop
+model.position.set(props.position[0], props.position[1], props.position[2]);
 
 onUnmounted(() => {
   dispose(model)

@@ -4,7 +4,7 @@ import { TresCanvas } from '@tresjs/core'
 import { CameraControls} from '@tresjs/cientos'
 import TheModel from '@/components/TheModel.vue'
 import RenderControl from '@/components/RenderControl.vue'
-const size = 100
+const size = 10
 const divisions = size * 4
 
 onMounted(() => {
@@ -12,7 +12,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <TresCanvas clear-color="#FFFFFF" window-size >
+  <TresCanvas clear-color="#0c0c0c" window-size >
     <RenderControl />
     <TresPerspectiveCamera :position="[3, 2, 5]" :look-at="[0, 5, 0]" />
     <CameraControls />
@@ -21,16 +21,28 @@ onMounted(() => {
     <TresAmbientLight :intensity="1" />
 
     <Suspense>
-      <TheModel :position="[1, 0, 0]" />
+      <TheModel 
+        :position="[-1, 0, -2]"
+        :path="'https://raw.githubusercontent.com/XnetLoL/test/main/breakdance.glb'"
+      />
     </Suspense>
     <Suspense>
-      <TheModel :position="[-1, 0, 0]" />
+      <TheModel :position="[-1, 0, 0]"
+      :path="'SMPL_male_120_140_tx_embed.glb'" />
+    </Suspense>
+    <Suspense>
+      <TheModel :position="[1, 0, 0]"
+      :path="'skel_male_120_140_tx_embed.glb'" />
+    </Suspense>
+    <Suspense>
+      <TheModel :position="[2, 0, 0]"
+      :path="'myoMesh_male_120_140_tx_embed.glb'" />
     </Suspense>
     
     <TresGridHelper :args="[size, divisions]" />
   
 
-    <!-- <TresFog v-bind="{ color: '#F78B3D', near: '10', far: '60' }" /> -->
+    <TresFog v-bind="{ color: '#fff', near: '50', far: '80' }" />
   </TresCanvas>
   <div id="testContainer" ref="testContainer"></div>
 </template>
