@@ -3,7 +3,7 @@ import { onUnmounted } from 'vue'
 import { dispose } from '@tresjs/core'
 import { useGLTF, useAnimations } from '@tresjs/cientos'
 
-const props = defineProps(['position', 'path'])
+const props = defineProps(['position', 'path', 'scale'])
 
 
 const path = props.path;
@@ -21,8 +21,11 @@ const firstActionKey = actionKeys.length > 0 ? actionKeys[0] : null;
 const currentAction = firstActionKey ? actions[firstActionKey] : null;
 if (currentAction) currentAction.play()
 
-// Set position from component prop
+// Set position and scale from component prop
 model.position.set(props.position[0], props.position[1], props.position[2]);
+const scale = props.scale || [1, 1, 1];
+
+model.scale.set(scale[0], scale[1], scale[2]);
 
 onUnmounted(() => {
   dispose(model)
